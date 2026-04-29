@@ -18,14 +18,15 @@ namespace Exercices
     {
         static void Main(string[] args)
         {
-            //Serie2026();
-            Serie2022();
+            //Serie12026();
+            //Serie12022();
+            Serie2();
 
 
             Console.WriteLine("\n\nAppuie sur une touche pour finir");
             Console.ReadKey();
         }
-        static void Serie2026()
+        static void Serie12026()
         {
             //Exercice I  Opérations élémentaires
             Console.WriteLine("Ex 1");
@@ -232,7 +233,7 @@ namespace Exercices
         }
 
 
-        static void Serie2022()
+        static void Serie12022()
         {
             //Exercice V  Les nombres premiers
             Console.WriteLine("Ex 5");
@@ -301,6 +302,166 @@ namespace Exercices
                 else
                 {
                     return Gcd(b, r);
+                }
+            }
+        }
+
+        static void Serie2()
+        {
+            //Exercice I  Atelier autour des tableaux
+            Console.WriteLine("Ex 1");
+            int[] tab= { -1, 4, 7, 12, -6, 5 };
+            
+            AffTab(tab);
+            Console.WriteLine("TT = " + SumTab(tab));
+            tab = OpeTab(tab, '+', 1);
+            AffTab(tab);
+            Console.WriteLine("TT = " + SumTab(tab));
+            tab = OpeTab(tab, '-', 1);
+            AffTab(tab);
+            Console.WriteLine("TT = " + SumTab(tab));
+            tab = ConcatTab(tab, tab);
+            AffTab(tab);
+            Console.WriteLine("TT = " + SumTab(tab));
+
+
+
+            //Exercice II  Morpion
+            Console.WriteLine("Ex 2");
+            //1) Un tableau multi en [3,3] ou un tableau en escalier [3][3], ici j'utilise le [3,3]
+            // car toutes les cases de mon tab sont equitablement alimenté
+            char[,] grille =
+            {
+                {'_','_','_' },
+                {'_','_','_' },
+                {'_','_','_' }
+            };
+
+            DisplayMorpion(grille);
+            //Console.WriteLine(grille[0].Length);
+
+
+        }
+
+        static void AffTab(int[] tab)
+        {
+            tab.ToList().ForEach(i => Console.Write(i.ToString() + " "));
+            Console.WriteLine("");
+        }
+        static int SumTab(int[] tab)
+        {
+            int tt=0;
+            foreach (int i in tab)
+            {
+                tt += i;
+            }
+            return tt;
+        }
+
+        static int[] OpeTab(int[] tab, char ope, int b)
+        {
+            //int[] tablo = tab;
+            if(tab == null )
+            {
+                return null;
+            }
+
+            if (ope == '+')
+            {
+                for(int i=0; i < tab.Length; i++)
+                {
+                    tab[i] = tab[i] + b;
+                }
+                return tab;
+            }
+            else if (ope == '-')
+            {
+                for (int i = 0; i < tab.Length; i++)
+                {
+                    tab[i] = tab[i] - b;
+                }
+                return tab;
+            }
+            else if (ope == '*')
+            {
+                for (int i = 0; i < tab.Length; i++)
+                {
+                    tab[i] = tab[i] * b;
+                }
+                return tab;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        static int[] ConcatTab(int[] tab1, int[] tab2)
+        {
+            int Taille1, Taille2, Taille3;
+            if (tab1 == null)
+            {
+                Taille1 = 0;
+            }
+            else
+            {
+                Taille1 = tab1.Length;
+            }
+            if (tab2 == null)
+            {
+                Taille2 = 0;
+            }
+            else
+            {
+                Taille2 = tab2.Length;
+            }
+
+
+            Taille3 = Taille1 + Taille2;
+            if (Taille3 == 0)
+            {
+                return null;
+            }
+            Console.WriteLine(Taille3);
+            int count = 0;
+            int[] tab3 = new int[Taille3];
+            if (Taille1 > 0)
+            {
+                for (int i = 0; i < tab1.Length; i++)
+                {
+                    tab3[i] = tab1[i];
+                    count++;
+                }
+            }
+            if (Taille2 > 0)
+            {
+                for (int i = 0; i < tab2.Length; i++)
+                {
+                    tab3[i + count] = tab2[i];
+                }
+            }
+            return tab3;
+        }
+        static void DisplayMorpion(char [,] grille)
+        {
+            for (int i=0;i <3;i++)
+            {
+                for (int j=0;j<3;j++)
+                {
+                    Console.Write(grille[i,j] + " ");
+                }
+                Console.Write("\n");
+            }
+        }
+
+        static int CheckMorpion(char[,] grille)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (grille[i,0] == 'X' && grille[i, 1] == 'X' && grille[i, 2] == 'X')
+                {
+
                 }
             }
         }
