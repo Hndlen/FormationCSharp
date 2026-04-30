@@ -13,20 +13,28 @@ namespace Exercices
         Est,
         Ouest
     }
-
+    public struct QCM
+    {
+        public string Question;
+        // public List<string> Answers = new List<string>();
+        public string[] Answers;
+        public int Solution;
+        public int Weight;
+    }
     class Program
     {
         static void Main(string[] args)
         {
-            //Serie12026();
-            //Serie12022();
-            Serie2();
+            //Serie1_2026();
+            //Serie1_2022();
+            //Serie2_2026();
+            Serie2_2022();
 
 
             Console.WriteLine("\n\nAppuie sur une touche pour finir");
             Console.ReadKey();
         }
-        static void Serie12026()
+        static void Serie1_2026()
         {
             //Exercice I  Opérations élémentaires
             Console.WriteLine("Ex 1");
@@ -46,7 +54,7 @@ namespace Exercices
             //1)a  2J-1
             //1)b) 2N-1
             //2)a) N
-            //2)b).
+            //2)b) etage +- j
             Console.WriteLine("Ex 3");
             PyramideLisse(10);
             PyramideStrillée(10);
@@ -89,9 +97,9 @@ namespace Exercices
             }
         }
 
-        static void IntegerDivision(int a,int b)
+        static void IntegerDivision(int a, int b)
         {
-            int q,r;
+            int q, r;
             if (b == 0)
             {
                 Console.WriteLine(a + " : " + b + " = Operation invalide");
@@ -106,7 +114,7 @@ namespace Exercices
 
         static void Pow(int a, int b)
         {
-            for(int i=1; i <= b; i++)
+            for (int i = 1; i <= b; i++)
             {
                 a = a * i;
             }
@@ -117,7 +125,7 @@ namespace Exercices
 
         static string GoodDay(int heure)
         {
-           
+
             if (heure >= 0 && heure < 6)
             {
                 return "Merveilleuse nuit !";
@@ -149,9 +157,9 @@ namespace Exercices
         {
             for (int j = 0; j <= n; j++)
             {
-                for (int k = 0; k < 2*n; k++)
+                for (int k = 0; k < 2 * n; k++)
                 {
-                    if (k > n-j && k < n+j )
+                    if (k > n - j && k < n + j)
                     {
                         Console.Write('*');
                     }
@@ -159,7 +167,7 @@ namespace Exercices
                     {
                         Console.Write(' ');
                     }
-                    
+
                 }
                 Console.Write("\n");
             }
@@ -173,7 +181,7 @@ namespace Exercices
                 for (int k = 0; k < 2 * n; k++)
                 {
                     str = j % 2;
-                    if (j%2 != 0)
+                    if (j % 2 != 0)
                     {
                         if (k > n - j && k < n + j)
                         {
@@ -195,7 +203,7 @@ namespace Exercices
                             Console.Write(' ');
                         }
                     }
-                    
+
 
                 }
                 Console.Write("\n");
@@ -233,13 +241,13 @@ namespace Exercices
         }
 
 
-        static void Serie12022()
+        static void Serie1_2022()
         {
             //Exercice V  Les nombres premiers
             Console.WriteLine("Ex 5");
             int prime = 10;
             //Console.WriteLine(IsPrime(prime));
-            
+
             DisplayPrimes();
 
             //Exercice VI  Algorithme d'Euclide
@@ -256,16 +264,16 @@ namespace Exercices
         static bool IsPrime(int value)
         {
             double Racine = Math.Sqrt(value);
-            for (int i =0; i <= Racine; i++)
+            for (int i = 0; i <= Racine; i++)
             {
-                for (int j=0; j < value; j++)
+                for (int j = 0; j < value; j++)
                 {
                     if (value == i * j)
                     {
-                        
+
                         return false;
                     }
-                        
+
                 }
             }
             return true;
@@ -273,7 +281,7 @@ namespace Exercices
 
         static void DisplayPrimes()
         {
-            for(int i=0; i <= 100;i++)
+            for (int i = 0; i <= 100; i++)
             {
                 if (IsPrime(i) == true)
                 {
@@ -295,7 +303,7 @@ namespace Exercices
                 q = a / b;
                 r = a % b;
                 //Console.WriteLine(a + " " + b + " " + q + " " + r);
-                if (r==0)
+                if (r == 0)
                 {
                     return b;
                 }
@@ -306,12 +314,12 @@ namespace Exercices
             }
         }
 
-        static void Serie2()
+        static void Serie2_2026()
         {
             //Exercice I  Atelier autour des tableaux
             Console.WriteLine("Ex 1");
-            int[] tab= { -1, 4, 7, 12, -6, 5 };
-            
+            int[] tab = { -1, 4, 7, 12, -6, 5 };
+
             AffTab(tab);
             Console.WriteLine("TT = " + SumTab(tab));
             tab = OpeTab(tab, '+', 1);
@@ -332,13 +340,24 @@ namespace Exercices
             // car toutes les cases de mon tab sont equitablement alimenté
             char[,] grille =
             {
-                {'_','_','_' },
-                {'_','_','_' },
-                {'_','_','_' }
+                {'O','X','_' },
+                {'_','O','X' },
+                {'X','X','O' }
             };
 
             DisplayMorpion(grille);
-            //Console.WriteLine(grille[0].Length);
+
+            Console.WriteLine(CheckMorpion(grille));
+
+            //Exercice III  Recherche d'un élément
+            //2) dans le pire des cas: tab.Lenght
+            //4) dans le pire des cas: tab.Lenght / 2
+            Console.WriteLine("Ex 3");
+            int[] tableau = { 1, -5, 10, 3, 0, 4, 2, -7 };
+            int valeur = 4;
+            Console.WriteLine(LinearSearch(tableau, valeur));
+            int[] tableau2 = { 1, 2, 4, 6, 7, 9, 11, 16 };
+            Console.WriteLine(BinarySearch(tableau2, valeur));
 
 
         }
@@ -350,7 +369,7 @@ namespace Exercices
         }
         static int SumTab(int[] tab)
         {
-            int tt=0;
+            int tt = 0;
             foreach (int i in tab)
             {
                 tt += i;
@@ -361,14 +380,14 @@ namespace Exercices
         static int[] OpeTab(int[] tab, char ope, int b)
         {
             //int[] tablo = tab;
-            if(tab == null )
+            if (tab == null)
             {
                 return null;
             }
 
             if (ope == '+')
             {
-                for(int i=0; i < tab.Length; i++)
+                for (int i = 0; i < tab.Length; i++)
                 {
                     tab[i] = tab[i] + b;
                 }
@@ -443,13 +462,13 @@ namespace Exercices
             }
             return tab3;
         }
-        static void DisplayMorpion(char [,] grille)
+        static void DisplayMorpion(char[,] grille)
         {
-            for (int i=0;i <3;i++)
+            for (int i = 0; i < 3; i++)
             {
-                for (int j=0;j<3;j++)
+                for (int j = 0; j < 3; j++)
                 {
-                    Console.Write(grille[i,j] + " ");
+                    Console.Write(grille[i, j] + " ");
                 }
                 Console.Write("\n");
             }
@@ -457,13 +476,482 @@ namespace Exercices
 
         static int CheckMorpion(char[,] grille)
         {
+
             for (int i = 0; i < 3; i++)
             {
-                if (grille[i,0] == 'X' && grille[i, 1] == 'X' && grille[i, 2] == 'X')
+                //ligne
+                if (grille[i, 0] == 'X' && grille[i, 1] == 'X' && grille[i, 2] == 'X')
                 {
+                    // X win
+                    return 1;
+
+                }
+
+                if (grille[i, 0] == 'O' && grille[i, 1] == 'O' && grille[i, 2] == 'O')
+                {
+                    // O win
+                    return 2;
+                }
+
+                //colonne
+                if (grille[0, i] == 'X' && grille[1, i] == 'X' && grille[2, i] == 'X')
+                {
+                    // X win
+                    return 1;
+
+                }
+
+                if (grille[0, i] == 'O' && grille[1, i] == 'O' && grille[2, i] == 'O')
+                {
+                    // O win
+                    return 2;
+                }
+
+            }
+
+            //diago
+            if (grille[0, 0] == 'X' && grille[1, 1] == 'X' && grille[2, 2] == 'X')
+            {
+                // X win
+                return 1;
+            }
+
+            if (grille[0, 2] == 'X' && grille[1, 1] == 'X' && grille[2, 0] == 'X')
+            {
+                // X win
+                return 1;
+            }
+
+            if (grille[0, 0] == 'O' && grille[1, 1] == 'O' && grille[2, 2] == 'O')
+            {
+                // O win
+                return 2;
+            }
+
+            if (grille[0, 2] == 'O' && grille[1, 1] == 'O' && grille[2, 0] == 'O')
+            {
+                // O win
+                return 2;
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (grille[i, j] == '_')
+                    {
+                        return -1;
+                    }
 
                 }
             }
+
+            return 0;
         }
+
+        static int LinearSearch(int[] tableau, int valeur)
+        {
+            int indice = 0;
+            if (tableau == null)
+            {
+                return -1;
+            }
+
+            foreach (int i in tableau)
+            {
+                //Console.WriteLine(i);
+                if (i == valeur)
+                {
+                    return indice;
+                }
+                indice++;
+            }
+            return -1;
+        }
+
+        static int BinarySearch(int[] tableau, int valeur)
+        {
+            int N = tableau.Length / 2;
+            int dicho = N;
+            for (int i = 0; i < N; i++)
+            {
+                if (valeur == tableau[dicho])
+                {
+                    return dicho;
+                }
+                else if (valeur > tableau[dicho])
+                {
+                    dicho = dicho + dicho / 2;
+                }
+                else if (valeur < tableau[dicho])
+                {
+                    dicho = dicho / 2;
+                }
+
+            }
+
+            return -1;
+        }
+
+        static void Serie2_2022()
+        {
+            //Exercice II  Bases du calcul matriciel
+            Console.WriteLine("Exo2");
+            int[] left = { 1, 2, 3 };
+            int[] right = { -1, -4, 0 };
+            int[,] matrix;
+            matrix = BuildingMatrix(left, right);
+            DisplayMatrix(matrix, left.Length, right.Length);
+
+            int[][] leftMatrix =
+            {
+               new int [] {1,2 },
+               new int []  {4,6 },
+               new int []  {-1,8 }
+            };
+            int[][] rightMatrix =
+            {
+               new int [] {-1,5 },
+               new int []  {-4,0 },
+               new int []  {0,2 }
+
+
+            };
+            int[,] matrix2;
+            //Console.WriteLine("test " + leftMatrix.Length + " " + leftMatrix[1].Length);
+            matrix2 = Addition(leftMatrix, rightMatrix);
+            DisplayMatrix(matrix2, matrix2.GetLength(0), matrix2.GetLength(1));
+
+
+            int[,] matrix3;
+            int[][] leftMatrix2 =
+            {
+               new int [] {1,2 },
+               new int []  {4,6 },
+               new int []  {-1,8 }
+            };
+            int[][] rightMatrix2 =
+            {
+               new int [] {-1,5,0 },
+               new int []  {-4,0,1 }
+            };
+            matrix3 = Multiplication(leftMatrix2, rightMatrix2);
+            DisplayMatrix(matrix3, matrix3.GetLength(0), matrix3.GetLength(1));
+
+
+            //Exercice III  Crible d'Eratosthène
+            Console.WriteLine("Exo3");
+
+            EratosthenesSieve(100);
+
+            //Exercice IV  Questionnaire à choix multiple
+            Console.WriteLine("Exo4");
+            //1)b) Car il y a 1 question, plusieurs réponse possible,
+            //la solition qui est un entier de l'indice du tableau réponse
+            // et un entier pour le coef
+
+            QCM Q1 = new QCM
+            {
+                Question = "Mais où est donc Ornicar ?",
+                Answers = new string[]
+                {
+                    "Il est ici", "Il est par là", "C'est qui lahuisse ?"
+                },
+                Solution = 2,
+                Weight = 67
+
+            };
+            QCM Q2 = new QCM
+            {
+                Question = "Qui suis-je ?",
+                Answers = new string[]
+                {
+                    "Une chauve-souris chauve assis",
+                    "Une chauve-souris chauve qui souris à un chauve",
+                    "Une chauve-souris chauve assis qui souris à un chauve qui souris à une souris chauve"
+                },
+                Solution = 2,
+                Weight = 69
+
+            };
+
+            QCM[] qcms = new QCM[] { Q1, Q2 };
+
+            //QcmValidity(Q1);
+            //Console.WriteLine(AskQuestion(Q1));
+
+            //Console.WriteLine("taille " + qcms.Length);
+            AskQuestions(qcms);
+
+
+
+
+
+        }
+        static void DisplayMatrix(int[,] grille, int ni, int nj)
+        {
+            for (int i = 0; i < ni; i++)
+            {
+                for (int j = 0; j < nj; j++)
+                {
+                    Console.Write(grille[i, j] + " ");
+                }
+                Console.Write("\n");
+            }
+            Console.WriteLine(grille.GetLength(0));
+        }
+
+        static int[,] BuildingMatrix(int[] leftVector, int[] rightVector)
+        {
+            int taileLeftVector = leftVector.Length;
+            int tailleRightVector = rightVector.Length;
+            //int[][] tab = new int[taileLeftVector][tailleRightVector] ;
+            int[,] tab = new int[taileLeftVector, tailleRightVector];
+
+
+            for (int i = 0; i < taileLeftVector; i++)
+            {
+                for (int j = 0; j < tailleRightVector; j++)
+                {
+                    tab[i, j] = leftVector[i] * rightVector[j];
+                }
+
+            }
+
+            return tab;
+        }
+
+        static int[,] Addition(int[][] leftMatrix, int[][] rightMatrix)
+        {
+            Console.WriteLine("Addition");
+            int taileLeft = leftMatrix.Length;
+            Console.WriteLine(taileLeft);
+            int tailleRight = leftMatrix[1].Length;
+            Console.WriteLine(tailleRight);
+            //int[][] tab = new int[taileLeftVector][tailleRightVector] ;
+            int[,] tab = new int[taileLeft, tailleRight];
+
+
+            for (int i = 0; i < taileLeft; i++)
+            {
+                for (int j = 0; j < tailleRight; j++)
+                {
+                    tab[i, j] = leftMatrix[i][j] + rightMatrix[i][j];
+                    //tab[i, j] = leftVector[i] * rightVector[j];
+                }
+
+            }
+
+            return tab;
+        }
+
+        static int[,] Soustraction(int[][] leftMatrix, int[][] rightMatrix)
+        {
+            Console.WriteLine("Soustraction");
+            int taileLeft = leftMatrix.Length;
+            Console.WriteLine(taileLeft);
+            int tailleRight = leftMatrix[1].Length;
+            Console.WriteLine(tailleRight);
+            //int[][] tab = new int[taileLeftVector][tailleRightVector] ;
+            int[,] tab = new int[taileLeft, tailleRight];
+
+
+            for (int i = 0; i < taileLeft; i++)
+            {
+                for (int j = 0; j < tailleRight; j++)
+                {
+                    tab[i, j] = leftMatrix[i][j] - rightMatrix[i][j];
+                    //tab[i, j] = leftVector[i] * rightVector[j];
+                }
+
+            }
+
+            return tab;
+        }
+
+        static int[,] Multiplication(int[][] leftMatrix, int[][] rightMatrix)
+        {
+            int Longueur = leftMatrix.Length; ;
+
+
+            int Largeur = rightMatrix[1].Length; ;
+
+
+            int[,] tab = new int[Longueur, Largeur];
+            //C,L
+
+            for (int i = 0; i < Longueur; i++)
+            {
+                for (int j = 0; j < Largeur; j++)
+                {
+                    for (int k = 0; k < leftMatrix[1].Length; k++)
+                    {
+                        tab[j, i] = tab[j, i] + leftMatrix[j][k] * rightMatrix[k][i];
+                    }
+
+                }
+
+            }
+
+            return tab;
+        }
+
+
+        static int[] EratosthenesSieve(int n)
+        {
+            int i;
+            List<int> listeNumToN = new List<int>();
+            for (i = 2; i <= n; i++)
+            {
+                listeNumToN.Add(i);
+            }
+
+            string maListe = string.Join(", ", listeNumToN);
+            Console.WriteLine(maListe);
+            Console.WriteLine("toto " + listeNumToN.Last());
+
+            for (i = 2; i <= Math.Sqrt((double)listeNumToN.LastOrDefault()); i++)
+            {
+
+                for (int j = i * 2; j <= n; j = j + i)
+                {
+
+                    if (listeNumToN.Contains(j))
+                    {
+                        listeNumToN.Remove(j);
+                    }
+
+                }
+
+            }
+
+            string newListe = string.Join(", ", listeNumToN);
+            Console.WriteLine("test => " + newListe);
+            return null;
+        }
+
+        public static bool QcmValidity(QCM qcm)
+        {
+            try
+            {
+                if (qcm.Solution < 0 || qcm.Solution > qcm.Answers.Length)
+                {
+                    return false;
+                }
+
+                if (qcm.Weight <= 0)
+                {
+                    return false;
+                }
+
+                Console.Write("\n\nChoisir une réponse: ");
+                int reponse = Int32.Parse(Console.ReadLine());
+
+                do
+                {
+                    //Console.WriteLine(reponse + "_" + qcm.Solution);
+                    if (reponse > qcm.Answers.Length || reponse <= 0)
+                    {
+                        Console.WriteLine("Réponse invalide");
+                        Console.Write("\n\nChoisir une réponse: ");
+                        reponse = Int32.Parse(Console.ReadLine());
+                    }
+                    else
+                    {
+                        //gg = QcmValidity(qcm);
+                        //Console.WriteLine(reponse + "_" + qcm.Solution);
+                        if (reponse - 1 == qcm.Solution)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+
+                    }
+
+                } while (reponse > qcm.Answers.Length || reponse <= 0);
+
+
+
+
+                return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+
+
+        private static int AskQuestion(QCM qcm)
+        {
+            //Question
+            //bool gg;
+            Console.WriteLine("La question est la suivante: " + qcm.Question);
+            int count = 1;
+            int reponse;
+            foreach (string i in qcm.Answers)
+            {
+                Console.Write(count + ". Réponse: " + i + " | ");
+                count++;
+            }
+
+            if (QcmValidity(qcm) == true)
+            {
+                //Console.WriteLine();
+                return qcm.Weight;
+            }
+            else
+            {
+                return 0;
+            }
+
+            
+
+        }
+
+        static void AskQuestions(QCM[] qcm)
+        {
+            //Questions
+            int point = 0;
+            Console.WriteLine("taille " + qcm.Length);
+            for (int i = 0; i < qcm.Length; i++)
+            {
+                Console.WriteLine("La question est la suivante: " + qcm[i].Question);
+                int count = 1;
+                int reponse;
+                foreach (string it in qcm[i].Answers)
+                {
+                    Console.Write(count + ". Réponse: " + it + " | ");
+                    count++;
+                }
+
+                if (QcmValidity(qcm[i]) == true)
+                {
+                    point += qcm[i].Weight;
+                    Console.WriteLine("Bonne réponse: +" + qcm[i].Weight+ " points");
+                }
+                else
+                {
+                    Console.WriteLine("Looser");
+                }
+            }
+
+            Console.WriteLine("Voici tes points : " + point);            
+
+
+
+        }
+
+
+
+
+
+
+
     }
 }
