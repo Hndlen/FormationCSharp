@@ -11,8 +11,7 @@ namespace FormationMaze
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("\n\nAppuie sur une touche pour finir");
-            Console.ReadKey();
+            
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serie3;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,11 +29,53 @@ namespace Exercices
             //Serie1_2026();
             //Serie1_2022();
             //Serie2_2026();
-            Serie2_2022();
+            //Serie2_2022();
+
+            Serie3_2026();
 
 
+
+            //EXO 2
+
+
+
+
+
+
+            EndPerform();
+        }
+        static void EndPerform()
+        {
             Console.WriteLine("\n\nAppuie sur une touche pour finir");
             Console.ReadKey();
+        }
+        static void Serie3_2026()
+        {
+            //Exercice I  Traitement administratif
+            string phrase = "Bonjour, voici mon message de la plus haute importance";
+            string[] censure = { "voici", "plus" };
+            Console.WriteLine(phrase);
+            Console.WriteLine(AdministrativeTasks.EliminateSeditiousThoughts(phrase, censure));
+            Console.WriteLine(AdministrativeTasks.ControlFormat("M.   Dimitrov    Nikolai     25"));
+            Console.WriteLine(AdministrativeTasks.ChangeDate("Nous somme le 2001-02-09 aujourd'hui"));
+
+
+            //Exercice II  Code César
+            //1) Il sert a faire le decalage de 3 char par intervention 
+            Cesar ces = new Cesar();
+            Console.WriteLine(ces.CesarCode("TOTORI"));
+            Console.WriteLine(ces.DecryptCesarCode(ces.CesarCode("TOTORI")));
+
+            Console.WriteLine(ces.GeneralCesarCode("TOTORI", 3)); 
+            Console.WriteLine(ces.GeneralDecryptCesarCode((ces.GeneralCesarCode("TOTORI", 3)),3));
+
+            //Exercice III  Code Morse
+            //1) afin d'avoir un binome lettre + code
+            Morse dic = new Morse();
+            Console.WriteLine(dic.LettersCount("Totori Totora"));
+            Console.WriteLine(dic.WordsCount("Totori Totora"));
+            Console.WriteLine(   dic.MorseEncryption("TOTO RIGOLO LE GIGOLO"));
+            Console.WriteLine(dic.MorseTranslation(dic.MorseEncryption("TOTO RIGOLO LE GIGOLO")));
         }
         static void Serie1_2026()
         {
