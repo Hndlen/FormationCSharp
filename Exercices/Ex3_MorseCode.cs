@@ -81,10 +81,7 @@ namespace Serie3
             {
                 return -1;
             }
-   
         }
-
-        
 
         public string MorseTranslation(string code)
         {
@@ -94,12 +91,9 @@ namespace Serie3
             string mot = "";
             string lettre = "";
             string separator = PointWord + PointLetter;
-
             for( int i = 0; i < code.Length; i++)
             {
-                
                 count = code.IndexOf(separator, i);
-                
                 if(count != -1)
                 {
                     mot = code.Substring(i, count-i);
@@ -113,7 +107,6 @@ namespace Serie3
                     for (int j = 0; j < mot.Length; j++)
                     {
                         cnt = mot.IndexOf(PointLetter, j);
-
                         {
                             if (cnt != -1)
                             {
@@ -125,25 +118,16 @@ namespace Serie3
                                 lettre = mot.Substring(j, mot.Length - j);
                                 j = mot.Length;
                             }
-
                             for (int k = 0; k < 26; k++)
                             {
-
                                 if (lettre == _alphabet.Keys.ElementAt(k))
                                 {
-
                                     str = str + _alphabet.Values.ElementAt(k) ;
-
                                 }
                             }
-
                         }
-   
-
                     }
-
                 str = str + " ";
-
             }
 
             return str;
@@ -167,7 +151,6 @@ namespace Serie3
             {
                 if (sentence[i] == ' ')
                 {
-                    //str = str + "_";
                     str = str + PointWord;
                 }
                 else

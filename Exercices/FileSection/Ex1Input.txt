@@ -1,0 +1,8 @@
+Jean;Cobol;3.0
+Idana;Cobol;6.6
+Luke;Cobol;9.5
+Faker;Cobol;20.0
+Jean;Joie;1.7
+Idana;Joie;2.3
+Luke;Joie;20.0
+Faker;Joie;20.0

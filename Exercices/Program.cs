@@ -31,10 +31,11 @@ namespace Exercices
             //Serie2_2026();
             //Serie2_2022();
 
-            Serie3_2026();
+            //Serie3_2026();
 
-
-
+            Serie4 S4 = new Serie4();
+            S4.Serie4_2026();
+            
             //EXO 2
 
 
