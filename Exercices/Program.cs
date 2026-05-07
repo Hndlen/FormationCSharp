@@ -33,12 +33,12 @@ namespace Exercices
 
             //Serie3_2026();
 
-            Serie4 S4 = new Serie4();
-            S4.Serie4_2026();
-            
+            //Serie4 S4 = new Serie4();
+            //S4.Serie4_2026();
+
             //EXO 2
 
-
+            test to;
 
 
 

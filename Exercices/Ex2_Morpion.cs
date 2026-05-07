@@ -8,6 +8,7 @@ namespace Serie4
 {
     public static class Morpion
     {
+
         public static void MorpionGame()
         {
             //TODO
@@ -142,7 +143,43 @@ namespace Serie4
             return -1;
         }
 
-        public static char[,] PlayCheck (char[,] grille, char player)
+        public static char[,] PlayForm(char[,] grille, char player,string coup)
+        {
+            //string coup;
+            int col = 0; 
+            
+            
+               
+                if (coup.Length == 2)
+                {
+                    if (coup[0] == 'A' || coup[0] == 'B' || coup[0] == 'C')
+                    {
+                        if (coup[0] == 'A')
+                        {
+                            col = 0;
+                        }
+                        if (coup[0] == 'B')
+                        {
+                            col = 1;
+                        }
+                        if (coup[0] == 'C')
+                        {
+                            col = 2;
+                        }
+                       
+                    }
+                   
+                } 
+                    if (grille[col, Int32.Parse(coup[1].ToString()) - 1] == '_')
+                    {
+                        grille[col, Int32.Parse(coup[1].ToString()) - 1] = player;
+                    }
+            return grille;
+        }
+    
+
+
+    public static char[,] PlayCheck (char[,] grille, char player)
         {
             string coup;
             int col = 0; ;
