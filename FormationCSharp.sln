@@ -9,7 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormationMaze", "FormationM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormTest", "FormTest\FormTest.csproj", "{25D7A75A-E784-45BE-B38F-98977CC7E020}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetSilver", "ProjetSilver\ProjetSilver.csproj", "{E42C8B77-3E55-493F-9D86-6E16E7991AD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetSilver", "ProjetSilver\ProjetSilver.csproj", "{E42C8B77-3E55-493F-9D86-6E16E7991AD1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp", "WpfApp\WpfApp.csproj", "{1DF9901A-38AA-4C2B-A82E-0B692B80251A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Or", "Or\Or.csproj", "{8E58D626-3838-4CDA-8C69-B9C0386E35D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{E42C8B77-3E55-493F-9D86-6E16E7991AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E42C8B77-3E55-493F-9D86-6E16E7991AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E42C8B77-3E55-493F-9D86-6E16E7991AD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DF9901A-38AA-4C2B-A82E-0B692B80251A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DF9901A-38AA-4C2B-A82E-0B692B80251A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DF9901A-38AA-4C2B-A82E-0B692B80251A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DF9901A-38AA-4C2B-A82E-0B692B80251A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E58D626-3838-4CDA-8C69-B9C0386E35D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E58D626-3838-4CDA-8C69-B9C0386E35D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E58D626-3838-4CDA-8C69-B9C0386E35D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E58D626-3838-4CDA-8C69-B9C0386E35D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
