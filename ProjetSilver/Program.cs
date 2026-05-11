@@ -27,7 +27,8 @@ namespace ProjetSilver
             Console.WriteLine("\n\n\n\n\n Affichage Apres Transaction\n\n\n");
             CreditMutuel.ListeDesComptes();
 
-            //CreditMutuel.ListeDesCartes();
+            Console.WriteLine("Affichage des Cartes :");
+            CreditMutuel.ListeDesCartes();
             Console.WriteLine("Affichage des transactions :");
             CreditMutuel.ListeDesTransactions();
 

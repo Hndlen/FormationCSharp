@@ -43,8 +43,7 @@ namespace ProjetSilver
         {
             
             get {
-               // byte temp;
-                //temp = (byte)TypeSolde.Courant;
+
                 if (this.typeSolde == (byte)TypeSolde.Courant)
                 {
                     return "Courant";

@@ -11,7 +11,7 @@ namespace ProjetSilver
         public int NumeroCarte { get; }
         public double Plafond { get; private set; }
         public List<CompteBancaire> comptesBancaire { get; private set; }
-        //public List<Transaction> Transactions { get; private set; }
+
 
 
         public CarteBancaire(double plafond)

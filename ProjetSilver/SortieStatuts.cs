@@ -49,15 +49,7 @@ namespace ProjetSilver
                 w.WriteLine($"{identifiant};{stat}");
             }
 
-            /*using (StreamWriter op = new StreamWriter(output))
-            {
-                foreach (var item in Output)
-                {
-                    newLine = item.Key + ";" + item.Value;
-                    op.WriteLine(newLine);
 
-                }
-            };*/
 
         }
 

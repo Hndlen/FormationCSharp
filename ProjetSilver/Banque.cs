@@ -24,7 +24,6 @@ namespace ProjetSilver
 
         public void NouvelleCarte(int numeroCarte,double plafond=500)
         {
-            //CarteBancaire nouvelleCB = new CarteBancaire(plafond);
             _listeCartesBancaire.Add(new CarteBancaire(numeroCarte,plafond));
         }
 
@@ -117,11 +116,6 @@ namespace ProjetSilver
 
         }
 
-        //temporaire
-        public int DerniereCarte()
-        {
-            return _listeCartesBancaire[_listeCartesBancaire.Count-1].NumeroCarte;
-        }
 
         public bool Plafond(int NumeroCompte, decimal montant)
         {

@@ -50,7 +50,7 @@ namespace ProjetSilver
                     decompose = item.Split(';');
                     try
                     {
-                        //Console.WriteLine(item);
+
                     if(decompose[1] == null || decompose[1] == "")
                     {
                         decompose[1] = "500";
