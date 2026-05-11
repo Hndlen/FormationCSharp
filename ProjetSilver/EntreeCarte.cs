@@ -29,10 +29,11 @@ namespace ProjetSilver
 
             public const string nomFichierCarte = "ImportCartes.txt";
 
-            //public Entree (IEnumerable<String> cartes, IEnumerable<String> comptes, IEnumerable<String> transcactions)
+
             public EntreeCarte(Banque nomBanque)
             {
-                if(File.Exists(nomFichierCarte))
+            
+            if (File.Exists(nomFichierCarte))
             {
 
             
@@ -47,11 +48,19 @@ namespace ProjetSilver
                 foreach (var item in ligneCartes)
                 {
                     decompose = item.Split(';');
-                    Console.WriteLine(item);
+                    try
+                    {
+                        //Console.WriteLine(item);
+                    if(decompose[1] == null || decompose[1] == "")
+                    {
+                        decompose[1] = "500";
+                    }
+
                     ca.nouvelleCarte(Int32.Parse(decompose[0]), Convert.ToDouble(decompose[1], CultureInfo.InvariantCulture.NumberFormat));
                     carte.Add(ca);
                     if (decompose[0].Length == 16 && Convert.ToDouble(decompose[1], CultureInfo.InvariantCulture.NumberFormat) >= 500 && Convert.ToDouble(decompose[1], CultureInfo.InvariantCulture.NumberFormat) <= 3000)
                     {
+
                         if (nomBanque.ChercheExistanceCarte(Int32.Parse(decompose[0])))
                         {
                             nomBanque.NouvelleCarte(Int32.Parse(decompose[0]), Convert.ToDouble(decompose[1], CultureInfo.InvariantCulture.NumberFormat));
@@ -70,11 +79,19 @@ namespace ProjetSilver
 
                 }
 
-            Archivage();
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"    #Creation de carte {decompose[0]}  {decompose[1]} a tort");
+                    }
+
+                }
+                Archivage();
             }
                 
         }
-
+        /// <summary>
+        ///Creation d'archive pour avoir un historique du fichier 
+        /// </summary>
 
         public void Archivage()
         {

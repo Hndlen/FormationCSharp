@@ -10,9 +10,6 @@ namespace ProjetSilver
 
     class EntreeTransaction
     {
-        
-
-
         public struct Transactions
         {
             public int Identifiant { get; set; }
@@ -38,6 +35,7 @@ namespace ProjetSilver
         
         public EntreeTransaction(Banque nomBanque)
         {
+            
             if (File.Exists(nomFichierTransaction))
             {
 
@@ -53,7 +51,6 @@ namespace ProjetSilver
             {
                 
                 decompose = item.Split(';');
-                //Console.WriteLine(decompose[1]);
                 try
                 {
                     DateTime date = DateTime.ParseExact(
@@ -101,6 +98,9 @@ namespace ProjetSilver
             Archivage();
             }
         }
+        /// <summary>
+        ///Creation d'archive pour avoir un historique du fichier 
+        /// </summary>
         public void Archivage()
         {
             File.Move(nomFichierTransaction, $"{Directory.GetCurrentDirectory()}/Archive/{DateTime.Now.ToString("yyyy_MM_dd_HH_mm")}_{nomFichierTransaction}");

@@ -36,9 +36,10 @@ namespace ProjetSilver
  
         public const string nomFichierCompte = "ImportComptes.txt";
 
-        //public Entree (IEnumerable<String> cartes, IEnumerable<String> comptes, IEnumerable<String> transcactions)
+
         public EntreeCompte(Banque nomBanque)
         {
+            
             if (File.Exists(nomFichierCompte))
             {
 
@@ -55,7 +56,16 @@ namespace ProjetSilver
             {
                 decompose = item.Split(';');
 
-                co.nouveauCompte(Int32.Parse(decompose[0]), Int32.Parse(decompose[1]), Convert.ToByte(decompose[2]), Convert.ToDecimal(decompose[3], CultureInfo.InvariantCulture.NumberFormat));
+                try
+                {
+
+                    
+                    if (decompose[3] == null || decompose[3] == "")
+                    {
+                        decompose[3] = "0.0";
+                    }
+
+                    co.nouveauCompte(Int32.Parse(decompose[0]), Int32.Parse(decompose[1]), Convert.ToByte(decompose[2]), Convert.ToDecimal(decompose[3], CultureInfo.InvariantCulture.NumberFormat));
                 compte.Add(co);
                 if (decompose[0].Length == 16
                     && decompose[1].Length == 16
@@ -64,14 +74,17 @@ namespace ProjetSilver
                 {
                     if (nomBanque.ChercheExistanceCompte(Int32.Parse(decompose[0])))
                     {
+
                         if (nomBanque.ChercheExistanceCarte(Int32.Parse(decompose[1]))==false)
                         {
                             nomBanque.NouveauCompte(Int32.Parse(decompose[0]), Int32.Parse(decompose[1]), Convert.ToByte(decompose[2]), Convert.ToDecimal(decompose[3], CultureInfo.InvariantCulture.NumberFormat));
                         }
+
                         else
                         {
                             Console.WriteLine($"    #Creation de compte {decompose[0]}  {decompose[1]} {decompose[2]} {decompose[3]} a tort car carte existe pas");
                         }
+
                     }
                     else
                     {
@@ -86,12 +99,21 @@ namespace ProjetSilver
                     Console.WriteLine($"    #Creation de compte {decompose[0]}  {decompose[1]} {decompose[2]} {decompose[3]} a tort car incorrecte");
                 }
 
-            }
-            Archivage();
+                }
+            catch (Exception e)
+                {
+                        Console.WriteLine($"    #Creation de compte {decompose[0]}  {decompose[1]} {decompose[2]} {decompose[3]} a tort");
+                    }
+
+                }
+                Archivage();
 
             }
 
         }
+        /// <summary>
+        ///Creation d'archive pour avoir un historique du fichier 
+        /// </summary>
         public void Archivage()
         {
             File.Move(nomFichierCompte, $"{Directory.GetCurrentDirectory()}/Archive/{DateTime.Now.ToString("yyyy_MM_dd_HH_mm")}_{nomFichierCompte}");
