@@ -24,10 +24,7 @@ namespace Or.Models
             Historique = new List<Transaction>();
         }
 
-        public void SoldeCarteActuel(DateTime date,long numCarte)
-        {
-
-        }
+        
 
 
         public void AlimenterHistoriqueEtListeComptes(List<Transaction> hist, List<int> comptesId)
@@ -68,6 +65,21 @@ namespace Or.Models
             List<Transaction> retraitsHisto = Historique.Where(x => (x.Horodatage > dateEffet.AddDays(-10)) && ListComptesId.Contains(x.Expediteur)).Select(x => x).ToList();
             decimal sommeHisto = montant + retraitsHisto.Sum(x => x.Montant);
             return sommeHisto < Plafond;
+        }
+
+        public decimal PlafondActualise( DateTime dateEffet)
+        {
+            List<Transaction> retraitsHisto = Historique.Where(x => (x.Horodatage > dateEffet.AddDays(-10)) && ListComptesId.Contains(x.Expediteur)).Select(x => x).ToList();
+            decimal sommeHisto = retraitsHisto.Sum(x => x.Montant);
+            if(sommeHisto<Plafond)
+            {
+                return Plafond - sommeHisto;
+            }
+            else
+            {
+                return Plafond;
+            }
+            
         }
 
         /// <summary>

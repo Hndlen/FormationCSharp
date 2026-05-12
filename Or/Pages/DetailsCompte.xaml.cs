@@ -48,5 +48,10 @@ namespace Or.Pages
                 gridView.Columns[2].Width = totalWidth * 0.45; // 20%
             }
         }
+
+        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

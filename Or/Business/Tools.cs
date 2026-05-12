@@ -19,6 +19,16 @@ namespace Or.Business
         InterCompte = 2
     }
 
+    public enum CodeResultat
+    {
+        PlafondMaxAutoriseDepasse = 0,
+        MontantInvalide = 1,
+        SoldeInsuffisant = 2,
+        ViremenentVersLivretAutreCarteInterdite = 3,
+        OperationNonAutorise = 4,
+        OperationRefuse = 5
+    }
+
     public static class Tools
     {
         public static DateTime ConversionDate(string horodatage)
@@ -49,7 +59,35 @@ namespace Or.Business
             return expediteur + destinataire == 0;
         }
 
+        public static string Label(CodeResultat code)
+        {
+            switch (code)
+            {
+                case CodeResultat.PlafondMaxAutoriseDepasse:
+                    return "Plafond max autorisé depassé";
+   
+                case CodeResultat.MontantInvalide:
+                    return "Montant invalide";
+  
+                case CodeResultat.SoldeInsuffisant:
+                    return "Solde Insuffisant";
+ 
+                case CodeResultat.ViremenentVersLivretAutreCarteInterdite:
+                    return "Virement vers un livret d'une autre carte interdite";
+ 
+                case CodeResultat.OperationNonAutorise:
+                    return "Opération non authorisée";
 
+                case CodeResultat.OperationRefuse:
+                    return "Opération refusé";
+
+                default:
+                    break;
+
+
+            }
+            return code.ToString();
+        }
         public static Operation TypeTransaction(int expediteur, int destinataire)
         {
             // 0 -> Compte
@@ -68,5 +106,7 @@ namespace Or.Business
                 return Operation.InterCompte;
             }
         }
+
+
     }
 }

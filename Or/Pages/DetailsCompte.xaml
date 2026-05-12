@@ -35,10 +35,11 @@
             <TextBlock x:Name="Solde" HorizontalAlignment="Stretch" Margin="0,0,0,8" TextWrapping="Wrap" VerticalAlignment="Stretch" Background="#FFD2D0D0" Height="20" FontSize="14"/>
         </StackPanel>
 
-        <ListView x:Name="listView" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" SizeChanged="ListView_SizeChanged">
+        <ListView x:Name="listView" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" SizeChanged="ListView_SizeChanged" SelectionChanged="listView_SelectionChanged">
             <ListView.Resources>
                 <ec:EuroConverter x:Key="EuroConverter"/>
                 <ec:IsNegativeConverter x:Key="IsNegativeConverter"/>
+                <ec:TypeTransacConverter x:Key="TypeTransacConverter"/>
             </ListView.Resources>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -47,12 +48,25 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="80">
+                    <GridViewColumn Header="Id" Width="60">
 
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid>
                                     <TextBlock Text="{Binding IdTransaction}"
+                           Style="{StaticResource TextColumnStyle}"
+                           TextAlignment="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Operation" Width="75">
+
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock Text="{Binding OP, Converter={StaticResource TypeTransacConverter}}"
                            Style="{StaticResource TextColumnStyle}"
                            TextAlignment="Center" />
                                 </Grid>

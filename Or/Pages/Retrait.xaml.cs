@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 
 namespace Or.Pages
 {
+    
     /// <summary>
     /// Logique d'interaction pour Retrait.xaml
     /// </summary>
@@ -29,14 +30,21 @@ namespace Or.Pages
             CartePorteur.AlimenterHistoriqueEtListeComptes(transac, cpts);
             
             PlafondMaxRetrait.Text = CartePorteur.Plafond.ToString("C2");
-            PlafondActualiseRetrait.Text = PlafondMaxRetrait.Text;
+            //PlafondActualiseRetrait.Text = ComptePorteur.SoldeCarteActuel(DateTime.Now, CartePorteur.Id).ToString("C2");
+            PlafondActualiseRetrait.Text = CartePorteur.PlafondActualise(DateTime.Now).ToString("C2");
             Solde.Text = ComptePorteur.Solde.ToString("C2");
         }
 
+
+        public void SoldeCarteActuel(DateTime date, long numCarte)
+        {
+
+        }
         private void Retour_Click(object sender, RoutedEventArgs e)
         {
             OnReturn(null);
         }
+
 
         private void ValiderRetrait_Click(object sender, RoutedEventArgs e)
         {
@@ -45,23 +53,42 @@ namespace Or.Pages
                 //Compte fictif pour permettre la transaction
                 Compte compteBanque = new Compte(0, 0, TypeCompte.Courant, 0);
                 Transaction t = new Transaction(0, DateTime.Now, montant, ComptePorteur.Id, compteBanque.Id);
+                if(montant <= CartePorteur.PlafondActualise(DateTime.Now))
+                { 
+                    if (CartePorteur.EstRetraitAutoriseNiveauCarte(t, compteBanque, ComptePorteur) )
+                    {
+                        if(ComptePorteur.EstRetraitValide(t))
+                        {
+                            SqlRequests.EffectuerModificationOperationSimple(t, CartePorteur.Id);
 
-                if (CartePorteur.EstRetraitAutoriseNiveauCarte(t, compteBanque, ComptePorteur) && ComptePorteur.EstRetraitValide(t))
-                {
-                    SqlRequests.EffectuerModificationOperationSimple(t, CartePorteur.Id);
 
-
-                    OnReturn(null);
+                            OnReturn(null);
+                        }
+                        else
+                        {
+                            MessageBox.Show(Tools.Label(CodeResultat.SoldeInsuffisant));
+                        }
+                   
+                    }
+                    else
+                    {
+                        //MessageBox.Show("Opération de retrait non authorisée");
+                        MessageBox.Show(Tools.Label(CodeResultat.OperationNonAutorise));
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Opération de retrait non authorisée");
+                    MessageBox.Show(Tools.Label(CodeResultat.PlafondMaxAutoriseDepasse));
                 }
             }
             else
             {
-                MessageBox.Show("Montant invalide");
+                //MessageBox.Show("Montant invalide");
+                MessageBox.Show(Tools.Label(CodeResultat.MontantInvalide));
             }
+           
         }
+
+        
     }
 }
