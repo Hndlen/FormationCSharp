@@ -56,6 +56,7 @@ namespace Or.Pages
                 Compte ex = Expediteur.SelectedItem as Compte;
                 Compte de = Destinataire.SelectedItem as Compte;
 
+                // Bonne cinématique
                 Transaction t = new Transaction(0, DateTime.Now, montant, ex.Id, de.Id);
                 if(montant <= ex.Solde)
                 {

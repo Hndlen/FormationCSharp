@@ -1,29 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace Or.Business
 {
     public class TypeTransacConverter : IValueConverter
     {
+        // Ok utilisation d'un Converteur
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            // Les break ne sont pas nécessaires car tu as return 
 
             switch(value)
             {
                 case Operation.DepotSimple:
-                    return "Dépot";
-                    break;
+                    return "Dépôt";
                 case Operation.RetraitSimple:
                     return "Retrait";
-                    break;
                 case Operation.InterCompte:
                     return "Virement";
-                    break;
                 default:
                     break;
 

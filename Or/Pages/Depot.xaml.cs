@@ -38,7 +38,7 @@ namespace Or.Pages
                 Compte compteBanque = new Compte(0, 0, TypeCompte.Courant, 0);
                 Compte de = Destinataire.SelectedItem as Compte;
 
-                Transaction t = new Transaction(0, DateTime.Now, montant,  compteBanque.Id, de.Id);
+                Transaction t = new Transaction(0, DateTime.Now, montant, compteBanque.Id, de.Id);
 
                 if (de.EstDepotValide(t))
                 {
@@ -48,6 +48,7 @@ namespace Or.Pages
                 }
                 else
                 {
+                    // Code mort
                     //MessageBox.Show("Opération refusée");
                     MessageBox.Show(Tools.Label(CodeResultat.OperationRefuse));
                 }

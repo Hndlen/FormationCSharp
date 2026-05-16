@@ -61,7 +61,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Operation" Width="75">
+                    <GridViewColumn Header="Opération" Width="75">
 
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

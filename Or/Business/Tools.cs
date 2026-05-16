@@ -59,6 +59,7 @@ namespace Or.Business
             return expediteur + destinataire == 0;
         }
 
+        // Bonne pratique d'avoir centralisé les codes erreurs
         public static string Label(CodeResultat code)
         {
             switch (code)

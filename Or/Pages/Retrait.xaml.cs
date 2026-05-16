@@ -72,6 +72,7 @@ namespace Or.Pages
                     }
                     else
                     {
+                        // Evite le code mort si possible
                         //MessageBox.Show("Opération de retrait non authorisée");
                         MessageBox.Show(Tools.Label(CodeResultat.OperationNonAutorise));
                     }
