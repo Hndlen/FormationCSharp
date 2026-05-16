@@ -18,23 +18,23 @@ namespace ProjetSilver
         {
             
             NbrCartes++;
-            this.NumeroCarte = NbrCartes;
-            this.Plafond = plafond;
+            NumeroCarte = NbrCartes;
+            Plafond = plafond;
             Console.WriteLine($"Nouvelle carte {FormatNumeroCarte} avec un plafond à {plafond.ToString("C", new CultureInfo("fr-FR"))} ");
             
             
         }
         public double RetournerPlafond()
         {
-            return this.Plafond;
+            return Plafond;
         }
 
         public CarteBancaire(int numeroCarte, double plafond)
         {
 
             NbrCartes++;
-            this.NumeroCarte = numeroCarte;
-            this.Plafond = plafond;
+            NumeroCarte = numeroCarte;
+            Plafond = plafond;
             comptesBancaire = new List<CompteBancaire>();
             Console.WriteLine($"Nouvelle carte {FormatNumeroCarte} avec un plafond à {plafond.ToString("C", new CultureInfo("fr-FR"))} ");
 
@@ -48,7 +48,7 @@ namespace ProjetSilver
 
         public int RetournerCompte()
         {
-            return this.comptesBancaire[0].IdentifiantBancaire;
+            return comptesBancaire[0].IdentifiantBancaire;
         }
         
 

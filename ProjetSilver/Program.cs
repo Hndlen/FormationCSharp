@@ -10,13 +10,18 @@ namespace ProjetSilver
         Livret
 
     }
+
+    // valable pour la plupart des fichiers, les this ne sont pas nécessaire
+    // à l'intérieur des définitions des classes si on fait référence à des membres d'une instance de cette classe
+
     class Program
     {
+        // Bien ! Main ne contient pas de fonctionnel
         static void Main(string[] args)
         {
             Console.WriteLine(" _ Debut _ \n");
             Directory.SetCurrentDirectory($"../../../FileSection");
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
 
             Banque CreditMutuel = new Banque("Credit Mutuel");
             EntreeCarte fichiersEntreesCarte = new EntreeCarte(CreditMutuel);
@@ -32,14 +37,9 @@ namespace ProjetSilver
             Console.WriteLine("Affichage des transactions :");
             CreditMutuel.ListeDesTransactions();
 
-
-            
-
             EndPerform();
 
         }
-
-
 
 
         static void EndPerform()
@@ -49,7 +49,5 @@ namespace ProjetSilver
             Console.ReadKey();
         }
 
-
-        
     }
 }

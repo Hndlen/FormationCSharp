@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace ProjetSilver
 {
@@ -15,32 +13,30 @@ namespace ProjetSilver
             public string Statut { get; set; }
             public void nouveauStatut(int identifiant, string statut)
             {
-                this.Identifiant = identifiant;
-                this.Statut = statut;
+                Identifiant = identifiant;
+                Statut = statut;
             }
         }
-
-       
 
         public List<Statuts> statut { get; private set; }
 
         public const string nomFichierStatut = "ExportStatuts.txt";
 
-         public SortieStatuts(int identifiant,bool etat)
+        public SortieStatuts(int identifiant, bool etat)
         {
-            string[] decompose;
             string stat;
 
 
             statut = new List<Statuts>();
             Statuts st = new Statuts();
-            if(etat)
+            if (etat)
             {
-                stat = "Ok";
+                // Attention, c'est OK pas Ok
+                stat = "OK";
             }
             else
             {
-                stat = "Ko";
+                stat = "KO";
             }
             st.nouveauStatut(identifiant, stat);
 
@@ -48,9 +44,6 @@ namespace ProjetSilver
             {
                 w.WriteLine($"{identifiant};{stat}");
             }
-
-
-
         }
 
         public void Archivage()

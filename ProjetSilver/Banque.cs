@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ProjetSilver
 {
 
     public class Banque
     {
-        public string nomBanque { get; set; }
+        public string NomBanque { get; set; }
+        // Pour compte bancaire et les cartes, des dicos auraient pu être intéressants
         private List<CompteBancaire> _listeComptesBancaire;
         private List<CarteBancaire> _listeCartesBancaire;
         private List<Transaction> _listeTransactions;
@@ -15,34 +15,34 @@ namespace ProjetSilver
         public Banque(string nomBanque)
         {
             Console.WriteLine($"La banque {nomBanque} arrive sur le marché");
-            this.nomBanque = nomBanque;
+            NomBanque = nomBanque;
             _listeComptesBancaire = new List<CompteBancaire>();
             _listeCartesBancaire = new List<CarteBancaire>();
             _listeTransactions = new List<Transaction>();
         }
 
 
-        public void NouvelleCarte(int numeroCarte,double plafond=500)
+        public void NouvelleCarte(int numeroCarte, double plafond = 500)
         {
-            _listeCartesBancaire.Add(new CarteBancaire(numeroCarte,plafond));
+            _listeCartesBancaire.Add(new CarteBancaire(numeroCarte, plafond));
         }
 
-        public void NouveauCompte(int identifiant, int numeroCb,byte typeSolde,decimal Solde = 0)
+        public void NouveauCompte(int identifiant, int numeroCb, byte typeSolde, decimal Solde = 0)
         {
             CompteBancaire cb = new CompteBancaire(identifiant, numeroCb, typeSolde, Solde);
             _listeComptesBancaire.Add(cb);
             foreach (var item in _listeCartesBancaire)
             {
-                if(item.NumeroCarte == numeroCb)
+                if (item.NumeroCarte == numeroCb)
                 {
                     item.AjoutCompteBancaire(cb);
                 }
             }
         }
 
-        public void NouvelleTransaction(int identifiant, DateTime horodatage, decimal montant, int expediteur,int destinataire )
+        public void NouvelleTransaction(int identifiant, DateTime horodatage, decimal montant, int expediteur, int destinataire)
         {
-            if(RechercheSoldeCompte(expediteur, montant) && Plafond(expediteur, montant))
+            if (RechercheSoldeCompte(expediteur, montant) && Plafond(expediteur, montant))
             {
                 _listeTransactions.Add(new Transaction(identifiant, horodatage, montant, expediteur, destinataire));
                 Transfert(expediteur, destinataire, montant);
@@ -54,7 +54,7 @@ namespace ProjetSilver
                 SortieStatuts sortieStatuts = new SortieStatuts(identifiant, false);
                 Console.WriteLine($"Le compte {expediteur} n'a pas de tal pour la transaction {identifiant}");
             }
-            
+
         }
 
         public void Transfert(int expediteur, int destinataire, decimal montant)
@@ -63,38 +63,36 @@ namespace ProjetSilver
             {
                 if (item.IdentifiantBancaire == expediteur)
                 {
-
                     item.Virement(montant);
                 }
                 if (item.IdentifiantBancaire == destinataire)
                 {
-
                     item.Prelevement(montant);
                 }
             }
         }
 
-        public void Depot(int compte,decimal montant)
+        // Elle est bien cette méthode, mais pas utilisée - à supprimer 
+        public void Depot(int compte, decimal montant)
         {
-            if(montant > 0)
+            if (montant > 0)
             {
                 foreach (var item in _listeComptesBancaire)
                 {
                     if (item.IdentifiantBancaire == compte)
                     {
-
                         item.Depot(montant);
                     }
-
                 }
             }
             else
             {
                 Console.WriteLine("Depot a tort, montant incorrecte");
             }
-            
+
         }
 
+        // Elle est bien cette méthode, mais pas utilisée - à supprimer 
         public void Retrait(int compte, decimal montant)
         {
             if (montant > 0)
@@ -103,38 +101,36 @@ namespace ProjetSilver
                 {
                     if (item.IdentifiantBancaire == compte)
                     {
-
                         item.Retrait(montant);
                     }
-
                 }
             }
             else
             {
                 Console.WriteLine("Retrait a tort, montant incorrecte");
             }
-
         }
 
 
         public bool Plafond(int NumeroCompte, decimal montant)
         {
-            decimal balance=0;
+            decimal balance = 0;
             int nbreSeconde;
             int dixJours = 864000;
             TimeSpan compare;
             foreach (var item in _listeTransactions)
             {
-                if (item.RetournerExpediteur() == NumeroCompte )
-                    
+                if (item.RetournerExpediteur() == NumeroCompte)
+
                 {
+                    // DateTime.AddDays(10) existe - TimeSpan n'est pas obligatoire, mais ok
                     compare = DateTime.Now - item.RetournerHorodatage();
                     nbreSeconde = Math.Abs((int)compare.TotalSeconds);
-                    if(nbreSeconde < dixJours)
+                    if (nbreSeconde < dixJours)
                     {
                         balance = balance + item.RetournerMontant();
                     }
-                   
+
                 }
                 if (item.RetournerDestinataire() == NumeroCompte)
 
@@ -154,7 +150,7 @@ namespace ProjetSilver
             {
                 if (NumeroCompte == item.RetournerCompte())
                 {
-                    if(item.RetournerPlafond() >= (double)balance)
+                    if (item.RetournerPlafond() >= (double)balance)
                     {
                         return true;
                     }
@@ -165,15 +161,13 @@ namespace ProjetSilver
                 }
             }
 
-
             return false;
-
         }
-        public bool ChercheExistanceCarte(int NumeroCarte)
+        public bool ChercheExistenceCarte(int NumeroCarte)
         {
             foreach (var item in _listeCartesBancaire)
             {
-                if(item.NumeroCarte == NumeroCarte)
+                if (item.NumeroCarte == NumeroCarte)
                 {
                     return false;
                 }
@@ -181,7 +175,7 @@ namespace ProjetSilver
 
             return true;
         }
-        public bool ChercheExistanceCompte(int NumeroCompte)
+        public bool ChercheExistenceCompte(int NumeroCompte)
         {
             foreach (var item in _listeComptesBancaire)
             {
@@ -194,7 +188,7 @@ namespace ProjetSilver
             return true;
         }
 
-        public bool ChercheExistanceTransaction(int NumeroTransaction)
+        public bool ChercheExistenceTransaction(int NumeroTransaction)
         {
             foreach (var item in _listeTransactions)
             {
@@ -207,13 +201,13 @@ namespace ProjetSilver
             return true;
         }
 
-        public bool RechercheSoldeCompte(int numeroCompte,decimal montant)
+        public bool RechercheSoldeCompte(int numeroCompte, decimal montant)
         {
             foreach (var item in _listeComptesBancaire)
             {
                 if (item.IdentifiantBancaire == numeroCompte)
                 {
-                    if(item.SoldeCompte() >= montant)
+                    if (item.SoldeCompte() >= montant)
                     {
                         return true;
                     }
@@ -221,7 +215,6 @@ namespace ProjetSilver
                     {
                         return false;
                     }
-                    
                 }
             }
 
@@ -251,8 +244,5 @@ namespace ProjetSilver
             }
         }
     }
-
-    
-
 
 }

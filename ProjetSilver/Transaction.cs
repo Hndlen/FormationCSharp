@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 
 namespace ProjetSilver
 {
@@ -9,40 +7,41 @@ namespace ProjetSilver
     {
         public static int NbrTransactions { get; private set; } = 0;
         public int NumeroTransaction { get; }
-        private int IdentifiantExpediteur { get; set; }
-        private int IdentifiantDestinataire { get; set; }
+        private int IdentifiantExpediteur { get; }
+        private int IdentifiantDestinataire { get; }
         
-        private decimal Montant { get; set; }
-        private DateTime Horodatage { get; set; }
+        private decimal Montant { get; }
+        private DateTime Horodatage { get; }
         
         public Transaction(int numeroTransaction,DateTime horodatage, decimal montant,int expediteur, int destinataire)
         {
             NbrTransactions++;
-            this.NumeroTransaction = numeroTransaction;
-            this.Horodatage = horodatage;
-            this.Montant = montant;
-            this.IdentifiantExpediteur = expediteur;
-            this.IdentifiantDestinataire = destinataire;
+            NumeroTransaction = numeroTransaction;
+            Horodatage = horodatage;
+            Montant = montant;
+            IdentifiantExpediteur = expediteur;
+            IdentifiantDestinataire = destinataire;
 
             Console.WriteLine($"Nouvelle transaction {NumeroTransaction} {Horodatage} {Montant.ToString("C", new CultureInfo("fr-FR"))}");
             Console.WriteLine($"    De {FormatExpediteur} à {FormatDestinataire}");
         }
         public int RetournerExpediteur()
         {
-            return this.IdentifiantExpediteur;
+            return IdentifiantExpediteur;
         }
         public int RetournerDestinataire()
         {
-            return this.IdentifiantDestinataire;
+            return IdentifiantDestinataire;
         }
 
+        // Pourquoi tu fais des gets si tu as les propriétés ??
         public DateTime RetournerHorodatage()
         {
-            return this.Horodatage;
+            return Horodatage;
         }
         public decimal RetournerMontant()
         {
-            return this.Montant;
+            return Montant;
         }
         public string FormatExpediteur
         {
